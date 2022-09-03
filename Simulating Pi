@@ -1,0 +1,19 @@
+pi.calculator <- function(itirations=100000){
+  #create a data frame with random x and y points
+  df <- data.frame(x <-runif(itirations,-1,1),
+                   y <- runif(itirations,-1,1))
+  #create a new column in the data frame
+  df$itiration <- 1:itirations 
+  #check if the (x,y) point is in the inscribed circle
+  df$inside_circle <- ifelse(sqrt(x^2+y^2)<=1,1,0)
+  #estimate pi 
+  df$pi <- 4* cumsum(df$inside_circle) / df$itiration
+  return(df)
+}
+pi.calculator()
+#create a vraible to save the data frame created in the pi.calculator function
+pi_graph <- pi.calculator(100000)
+#plot pi estimate vs itiration
+ggplot(pi_graph,aes(itiration,pi))+
+  geom_line(col = "red") +
+  geom_hline(yintercept = pi)
