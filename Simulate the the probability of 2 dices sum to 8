@@ -1,0 +1,9 @@
+n<-10000
+simlist<- numeric(n)
+for (i in 1:n)
+{
+  space <- sample(1:6,2,replace=TRUE)
+  success<- if (sum(space)==8) 1 else 0 
+  simlist[i]<-success
+}
+mean(simlist)
