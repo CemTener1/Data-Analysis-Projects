@@ -1,0 +1,29 @@
+Four identical sealed envelopes are on a table. One contains a $100 bill. 
+You select an envelope at random and hold it in your hand without opening it. 
+Two of the three remaining envelopes are then removed and set aside, still sealed. 
+You are told that they are empty. 
+You are not given the choice of keeping the envelope you selected or exchanging it for the one on the table. 
+What should you do? A) Keep your envelope; B) switch it; or C) it doesn't matter.
+n<-100000
+keep<-c()
+switch<-c()
+for (i in 1:n){
+  envelope<-shuffle(c(1,0,0,0))
+  random<-sample(1:4,1,replace=T) #select an index and hold your envelope
+  selection<-envelope[random]
+  remaining<-envelope[-random] #take out the envolope selected
+  remaining
+  last_envelope<-c()
+  for (i in 1:3){
+    if (remaining[i]==1){
+      last_envelope<-1
+    }
+  }
+  if (is.null(last_envelope)){
+    last_envelope<-0
+  }
+  switch<-append(switch,last_envelope)
+  keep<-append(keep,selection)
+}
+mean(switch)
+mean(keep)
